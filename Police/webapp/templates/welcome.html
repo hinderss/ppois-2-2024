@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Добро пожаловать{% endblock %}
+{% block style %}welcome.css{% endblock %}
+{% block content %}
+<body data-path-to-root="./" data-include-products="false" class="u-body u-xl-mode" data-lang="ru">
+  <!-- <header class="u-clearfix u-header u-sticky" id="sec-74aa" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction=""><div class="u-container-style u-expanded-width u-group u-shape-rectangle u-white u-group-1">
+      <div class="u-container-layout u-container-layout-1">
+      </div>
+    </div>
+  </header> -->
+  <section class="u-clearfix u-section-1" id="sec-125d">
+    <img class="custom-expanded u-image u-image-default u-image-1" src="static/images/background.png" alt="" data-image-width="400" data-image-height="265">
+    <div class="u-container-style u-group u-shape-rectangle u-group-1">
+      <div class="u-container-layout u-container-layout-1">
+        <form action="/welcome" method="POST" id="form">
+          <img class="u-image u-image-default u-image-2" src="/static/images/police-officer_1f46e.png" alt="" data-image-width="400" data-image-height="265">
+          <h1 class="u-custom-font u-text u-text-font u-text-1">Добро пожаловать в Модель полиции.</h1>
+          <h3 class="u-text u-text-font u-text-2">Город </h3>
+          <h4 class="u-text u-text-grey-40 u-text-3">↓ Д​ля того, чтобы продолжить введите город, где находится ваш полицейский участок: </h4>
+          <div class="custom-expanded u-container-style u-grey-10 u-group u-radius u-shape-round u-group-2">
+            <div class="u-container-layout u-container-layout-2">
+              <p class="u-text u-text-default u-text-grey-40 u-text-4">
+                <!-- <input type="text" style="background-color: transparent; border: none;" placeholder="Введите город"> -->
+                {{ form.csrf_token }}
+                {{ form.city(style="background-color: transparent; border: none;", placeholder="Введите город") }}
+              </p>
+              <img class="custom-expanded u-image u-image-default u-image-3" src="static/images/noun-city-6739084.png" alt="" data-image-width="400" data-image-height="265">
+            </div>
+          </div>
+          <h4 class="u-text u-text-grey-40 u-text-5"> 👮У вас в участке работает <span class="u-text-palette-2-base">{{officers|length}} полицейских</span>.
+          </h4>
+          <h3 class="u-text u-text-font u-text-6">Имя </h3>
+          <h4 class="u-text u-text-grey-40 u-text-7">↓ ​Введите ваше имя, чтобы знать как к вам обращаться:</h4>
+          <div class="u-container-style u-expanded-width u-grey-10 u-group u-radius u-shape-round u-group-3">
+            <div class="u-container-layout u-container-layout-3">
+              <p class="u-text u-text-default u-text-grey-40 u-text-8">
+                <!-- <input type="text" style="background-color: transparent; border: none;" placeholder="Введите имя"> -->
+                {{ form.name(style="background-color: transparent; border: none;", placeholder="Введите имя", required=True) }}
+              </p>
+              <img class="custom-expanded u-image u-image-default u-image-4" src="static/images/noun-name-5695975.png" alt="" data-image-width="400" data-image-height="265">
+            </div>
+          </div>
+          <!-- <input type="submit" value="Отправить"> -->
+
+          {{ form.submit(class="u-border-none u-btn u-btn-round u-button-style u-grey-10 u-hover-palette-1-base u-radius u-btn-1", id="submit", required=True) }}
+          <!-- <a class="u-border-none u-btn u-btn-round u-button-style u-grey-10 u-hover-palette-1-base u-radius u-btn-1">{{ form.submit(class="u-border-none u-btn u-btn-round u-button-style u-grey-10 u-hover-palette-1-base u-radius u-btn-1") }} </a> -->
+        </form>
+      </div>
+    </div>
+  </section>
+  <section class="u-clearfix u-section-2" id="sec-a23d">
+    <div class="u-clearfix u-sheet u-sheet-1"></div>
+  </section>
+  
+  
+  
+  
+  <section class="u-backlink u-clearfix u-grey-80">
+    <p class="u-text">
+      <span>Модель полиции. </span>
+      <a class="u-link" href="/index" target="_blank" rel="nofollow">
+        <span>На главную</span>
+      </a>
+    </p>
+  </section>
+  <script>
+    document.getElementById('submit').addEventListener('click', function() {
+            document.getElementById('form').submit();
+        });
+  </script>
+</body>
+{% endblock %}

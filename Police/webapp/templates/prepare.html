@@ -1,0 +1,368 @@
+{% extends "base.html" %}
+{% block title %}Подготовка смены{% endblock %}
+{% block style %}prepare.css{% endblock %}
+{% block content %}
+<body data-path-to-root="./" data-include-products="false" class="u-body u-xl-mode" data-lang="ru">
+  <header class="u-clearfix u-header u-sticky" id="sec-74aa" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">
+    <div class="u-container-style u-expanded-width u-group u-shape-rectangle u-white u-group-1">
+      <div class="u-container-layout u-container-layout-1">
+        <p class="u-text u-text-default u-text-1"> Вы начинаете смену: {{date}}</p>
+        <!-- <p class="u-text u-text-default u-text-2"> Текущее время:  2024-02-21 08:38:00 </p> -->
+      </div>
+    </div>
+  </header>
+    <section class="u-clearfix u-valign-top u-section-1" id="sec-125d">
+      {% for status, case in cases %}
+        <div class="u-container-style u-group u-shape-rectangle u-group-2">
+          <div class="u-container-layout u-container-layout-2">
+            <img class="u-image u-image-default u-image-1" src="static/images/briefcase_1f4bc.png" alt="" data-image-width="400" data-image-height="265">
+            <h1 class="u-custom-font u-font-open-sans u-text u-text-font u-text-2"> Дело</h1>
+            <h4 class="u-custom-font u-font-open-sans u-text u-text-custom-color-1 u-text-7">
+              <span style="font-weight: 600;">{{ case.crime.title }}</span>
+              <br>
+            </h4>
+            <h4 class="u-custom-font u-font-open-sans u-text u-text-grey-40 u-text-13">{{ case.crime.description }}<br>
+            {% if status=='investigation' %}
+              <h4 class="u-text u-text-grey-40 u-text-5">↓ ​​Назначено&nbsp;<span class="u-text-palette-2-base">{{ case.officers|length }} офицеров</span>. Ещё расследуется...</h4>
+            {% elif status=='today' %}
+              <h4 class="u-text u-text-grey-40 u-text-5">↓ ​​Назначено&nbsp;<span class="u-text-palette-2-base">{{ case.officers|length }} офицеров</span>. Дело будет передано в суд, детективы освободятся сегодня...</h4>
+            {% else %}
+              <h4 class="u-text u-text-grey-40 u-text-9">↓ ​​Назначено&nbsp;<span class="u-text-palette-2-base">{{ case.officers|length }} офицеров</span>. Дело было рассмотрено. Предъявлены обвинения по следующей статье:
+              </h4>
+              <p class="u-custom-font u-font-open-sans u-text u-text-10"> {{ case.crime.law }} </p>
+            {% endif %}            
+          </div>
+        </div>
+
+      {% endfor %}
+      <!-- <div class="u-container-style u-group u-shape-rectangle u-group-2">
+        <div class="u-container-layout u-container-layout-2">
+          <img class="u-image u-image-default u-image-1" src="static/images/briefcase_1f4bc.png" alt="" data-image-width="400" data-image-height="265">
+          <h1 class="u-custom-font u-font-open-sans u-text u-text-font u-text-2"> Дело</h1>
+          <h4 class="u-custom-font u-font-open-sans u-text u-text-custom-color-1 u-text-7">
+            <span style="font-weight: 600;">Bulgary</span>
+            <br>
+          </h4>
+          <h4 class="u-custom-font u-font-open-sans u-text u-text-grey-40 u-text-13">A residential burglary occurred during daylight hours.<br>
+          <h4 class="u-text u-text-grey-40 u-text-5">↓ ​​Назначено&nbsp;<span class="u-text-palette-2-base">1 офицеров</span>. Ещё расследуется...
+          </h4>
+        </div>
+      </div>
+
+      <div class="u-container-style u-group u-shape-rectangle u-group-3">
+        <div class="u-container-layout u-container-layout-3">
+          <img class="u-image u-image-default u-image-2" src="static/images/briefcase_1f4bc.png" alt="" data-image-width="400" data-image-height="265">
+          <h1 class="u-custom-font u-font-open-sans u-text u-text-font u-text-6"> Дело</h1>
+          <h4 class="u-custom-font u-font-open-sans u-text u-text-custom-color-1 u-text-7">
+            <span style="font-weight: 600;">Night Store Robbery</span>
+            <br>
+          </h4>
+          <h4 class="u-custom-font u-font-open-sans u-text u-text-grey-40 u-text-8"> A small store was robbed at night.<br>
+          </h4>
+          <h4 class="u-text u-text-grey-40 u-text-9">↓ ​​Назначено&nbsp;<span class="u-text-palette-2-base">1 офицеров</span>. Дело было рассмотрено. Предъявлены обвинения по следующей статье:
+          </h4>
+          <p class="u-custom-font u-font-open-sans u-text u-text-10"> Theft Act 1968 - Imprisonment up to 7 years.</p>
+        </div>
+      </div> -->
+      <div class="u-container-style u-group u-shape-rectangle u-group-4">
+        <div class="u-container-layout u-container-layout-4">
+          <img class="u-image u-image-default u-image-3" src="static/images/loudspeaker_1f4e2.png" alt="" data-image-width="400" data-image-height="265">
+          <h1 class="u-custom-font u-font-open-sans u-text u-text-font u-text-11"> Запрос охраны общественного порядка!</h1>
+          <h4 class="u-custom-font u-font-open-sans u-text u-text-grey-40 u-text-12">
+            <span style="font-weight: 600;" class="u-text-palette-1-base">{{ patrol_event.title }}</span>
+            <br>
+          </h4>
+          <h4 class="u-custom-font u-font-open-sans u-text u-text-grey-40 u-text-13">{{ patrol_event.description }}<br>
+          </h4>
+          <h4 class="u-text u-text-grey-40 u-text-14">↓ ​​Необходимо назначить <span class="u-text-palette-2-base">{{ patrol_event.slots }} офицеров</span>.
+          </h4>
+          <div class="u-table u-table-responsive u-table-1">
+            <table class="u-table-entity">
+              <colgroup>
+                <col width="4.2%">
+                <col width="5.3%">
+                <col width="16%">
+                <col width="30.9%">
+                <col width="13.1%">
+                <col width="7.2%">
+                <col width="23.399999999999995%">
+              </colgroup>
+              <thead class="u-table-header">
+                <tr style="height: 69px;">
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"></th>
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"> №</th>
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"> Тип офицера</th>
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"> Имя</th>
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"> Звание</th>
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"> Опыт</th>
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"> Будет свободен</th>
+                </tr>
+              </thead>
+              <tbody class="u-table-body" id="patrol_table">
+                <form action="/prepare" method="POST" id="patrol_form">
+                  {% for status, officer in patrol_officers %}
+                    {% if status == 'unavailable' %}
+                    <tr style="height: 45px; text-decoration: line-through;">
+                    <!-- <tr style="height: 45px;"> -->
+                    {% else %}
+                    <tr style="height: 45px;">
+                    {% endif %}
+                      <!-- <td class="u-border-1 u-border-grey-25 u-table-cell"> ⬜&nbsp;&nbsp;</td> -->
+                      <td class="u-border-1 u-border-grey-25 u-table-cell">
+                        {% if status == 'available' %}
+                          <input type="checkbox" id="myCheckbox" name="{{ officer.name }}" value="">
+                        {% endif %}
+                      </td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell">
+                        {% if status == 'available' %}
+                          {{ loop.index }}
+                        {% endif %}
+                      </td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> 👮Patrol Officer</td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> {{ officer.name }} </td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> {{ officer.rank }}</td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> ★{{ officer.experience }}</td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> {{ officer.unavailable_until.strftime("%d.%m.%Y %H:%M") }}</td>
+                    </tr>
+                    <!-- <tr style="height: 45px;">
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> ⬜&nbsp;</td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> 2</td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> 👮Patrol Officer</td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> Ryan Baker </td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> Captain</td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> ★8</td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> 2024-02-20 00:00:00</td>
+                    </tr> -->
+                  {% endfor %}
+                </form>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="u-container-style u-group u-shape-rectangle u-group-5">
+        <div class="u-container-layout u-container-layout-5">
+          <img class="u-image u-image-default u-image-4" src="static/images/detective_1f575-fe0f.png" alt="" data-image-width="400" data-image-height="265">
+          <h1 class="u-custom-font u-font-open-sans u-text u-text-font u-text-15">Детективы</h1>
+          <h4 class="u-text u-text-grey-40 u-text-16">↓ ​​Назначьте детективов сегодня:</h4>
+          <div class="u-table u-table-responsive u-table-2">
+            <table class="u-table-entity">
+              <colgroup>
+                <col width="4.2%">
+                <col width="5.3%">
+                <col width="16%">
+                <col width="30.9%">
+                <col width="13.1%">
+                <col width="7.2%">
+                <col width="23.399999999999995%">
+              </colgroup>
+              <thead class="u-table-header">
+                <tr style="height: 69px;">
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"></th>
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"> №</th>
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"> Тип офицера</th>
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"> Имя</th>
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"> Звание</th>
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"> Опыт</th>
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"> Будет свободен</th>
+                </tr>
+              </thead>
+              <tbody class="u-table-body">
+                <form action="/prepare" method="POST" id="detective_form">
+                  {% for status, officer in detective_officers %}
+                    {% if status == 'unavailable' %}
+                    <tr style="height: 45px; text-decoration: line-through;">
+                    {% else %}
+                    <tr style="height: 45px;">
+                    {% endif %}
+                      <td class="u-border-1 u-border-grey-25 u-table-cell">
+                        {% if status == 'available' %}
+                          <input type="checkbox" id="myCheckbox" name="{{ officer.name }}" value="">
+                        {% endif %}
+                      </td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell">
+                        {% if status == 'available' %}
+                          {{ loop.index }}
+                        {% endif %}
+                      </td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> 🕵️Detective</td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> {{ officer.name }} </td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> {{ officer.rank }}</td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> ★{{ officer.experience }}</td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> {{ officer.unavailable_until.strftime("%d.%m.%Y %H:%M") }}</td>
+                    </tr>
+                  {% endfor %}
+                </form>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="u-container-style u-group u-shape-rectangle u-group-6">
+        <div class="u-container-layout u-container-layout-6">
+          <img class="u-image u-image-default u-image-5" src="static/images/police-car-light_1f6a8.png" alt="" data-image-width="400" data-image-height="265">
+          <h1 class="u-custom-font u-font-open-sans u-text u-text-font u-text-17">Вызовы</h1>
+          <h4 class="u-text u-text-grey-40 u-text-18">↓ ​​Назначьте офицеров, которые будут отвечать на вызовы:</h4>
+          <div class="u-table u-table-responsive u-table-3">
+            <table class="u-table-entity">
+              <colgroup>
+                <col width="4.2%">
+                <col width="5.3%">
+                <col width="16%">
+                <col width="30.9%">
+                <col width="13.1%">
+                <col width="7.2%">
+                <col width="23.399999999999995%">
+              </colgroup>
+              <thead class="u-table-header">
+                <tr style="height: 69px;">
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"></th>
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"> №</th>
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"> Тип офицера</th>
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"> Имя</th>
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"> Звание</th>
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"> Опыт</th>
+                  <th class="u-border-1 u-border-grey-25 u-table-cell u-text-grey-30"> Будет свободен</th>
+                </tr>
+              </thead>
+              <tbody class="u-table-body">
+                <form action="/prepare" method="POST" id="public_security_form">
+                  {% for status, officer in patrol_officers %}
+                    {% if status == 'unavailable' %}
+                    <tr style="height: 45px; text-decoration: line-through;">
+                    <!-- <tr style="height: 45px;"> -->
+                    {% else %}
+                    <tr style="height: 45px;" id="{{ officer.name }}">
+                    {% endif %}
+                      <!-- <td class="u-border-1 u-border-grey-25 u-table-cell"> ⬜&nbsp;&nbsp;</td> -->
+                      <td class="u-border-1 u-border-grey-25 u-table-cell">
+                        {% if status == 'available' %}
+                          <input type="checkbox" id="myCheckbox" name="{{ officer.name }}" value="">
+                        {% endif %}
+                      </td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell">
+                        {% if status == 'available' %}
+                          {{ loop.index }}
+                        {% endif %}
+                      </td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> 👮Patrol Officer</td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> {{ officer.name }} </td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> {{ officer.rank }}</td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> ★{{ officer.experience }}</td>
+                      <td class="u-border-1 u-border-grey-25 u-table-cell"> {{ officer.unavailable_until.strftime("%d.%m.%Y %H:%M") }}</td>
+                    </tr>
+                  {% endfor %}
+                </form>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <input class="u-border-none u-btn u-btn-round u-button-style u-grey-10 u-hover-palette-1-base u-radius u-btn-1" id="submit" name="submit" required="" type="submit" value="Назначить">
+    </section>
+    <section class="u-clearfix u-section-2" id="sec-a23d">
+      <div class="u-clearfix u-sheet u-sheet-1"></div>
+    </section>
+    
+    
+    
+    
+    <section class="u-backlink u-clearfix u-grey-80">
+      <p class="u-text">
+        <span>Модель полиции. </span>
+        <a class="u-link" href="/index" target="_blank" rel="nofollow">
+          <span>На главную</span>
+        </a>
+      </p>
+    </section>
+
+    <script>
+      var checkboxes = document.querySelectorAll('#patrol_table input[type="checkbox"]');
+      checkboxes.forEach(function(checkbox) {
+          checkbox.addEventListener('change', function() {
+              var checkboxId = this.getAttribute('name');
+              var row = document.getElementById(checkboxId);
+              if (checkbox.checked) {
+                  row.style.display = 'none';
+                  row.querySelector('input[type="checkbox"]').checked = false;
+              } else {
+                  row.style.display = '';
+              }
+          });
+      });
+  </script>
+
+  <style>
+    .inactive {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        var button = document.getElementById('submit');
+        function disableButton() {
+          button.disabled = true;
+          button.classList.add('inactive');
+          button.title = 'Выберите {{patrol_event.slots}} офицеров на запрос охраны общественного порядка!';
+        }
+        disableButton();
+
+        var checkboxes = document.querySelectorAll('#patrol_table input[type="checkbox"]');
+        console.log(checkboxes);        
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                var checkedCheckboxes = document.querySelectorAll('#patrol_table input[type="checkbox"]:checked');
+                console.log(checkedCheckboxes.length);
+                if (checkedCheckboxes.length > {{patrol_event.slots}}) {
+                    this.checked = false;
+                    this.dispatchEvent(new Event('change'));
+                } else if (checkedCheckboxes.length < {{patrol_event.slots}}) {
+                    disableButton();
+                } else {
+                  button.disabled = false;
+                  button.classList.remove('inactive');
+                  button.title = '';
+                }
+            });
+        });
+    });
+  </script>
+
+  <script>
+    document.getElementById('submit').addEventListener('click', function() {
+      var publicSecurityFormData = new FormData(document.getElementById('patrol_form'));
+      var detectiveFormData = new FormData(document.getElementById('detective_form'));
+      var patrolFormData = new FormData(document.getElementById('public_security_form'));
+
+      var combinedFormData = new FormData();
+      for (var pair of publicSecurityFormData.entries()) {
+          combinedFormData.append(pair[0], 'patrol_form' + pair[1]);
+      }
+      for (var pair of detectiveFormData.entries()) {
+          combinedFormData.append(pair[0], 'detective_form' + pair[1]);
+      }
+      for (var pair of patrolFormData.entries()) {
+          combinedFormData.append(pair[0], 'public_security_form' + pair[1]);
+      }
+
+      fetch('/prepare', {
+          method: 'POST',
+          body: combinedFormData
+      })
+      .then(response => {
+          // Обработка ответа от сервера
+      })
+      .catch(error => {
+          // Обработка ошибки
+      });
+      window.location.href = '/call';
+    });
+
+
+  </script>
+
+</body>
+{% endblock %}
